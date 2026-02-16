@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Key | Brainrot Hub</title>
+    <style>
+        /* Estilo Dark Neon */
+        body {
+            background-color: #0a0a0a;
+            color: #00ff95;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #151515;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #00ff95;
+            box-shadow: 0 0 20px rgba(0, 255, 149, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+        h1 { font-size: 22px; margin-bottom: 20px; }
+        input {
+            width: 80%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #222;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 5px;
+            outline: none;
+        }
+        input:focus { border-color: #00ff95; }
+        button {
+            background-color: #00ff95;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #00cc77; transform: scale(1.05); }
+        #keyDisplay {
+            margin-top: 25px;
+            padding: 15px;
+            background: #222;
+            border-radius: 5px;
+            display: none; /* Se muestra al generar */
+        }
+        .key-text {
+            color: #fff;
+            font-size: 18px;
+            word-break: break-all;
+            user-select: all; /* Facilita copiar con un toque */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>BRAINROT KEY</h1>
+        <p style="color: #888; font-size: 14px;">Introduce tu UserId de Roblox</p>
+        
+        <input type="number" id="userId" placeholder="Ej: 12345678">
+        <br>
+        <button onclick="generarKey()">GENERAR LLAVE</button>
+
+        <div id="keyDisplay">
+            <p style="font-size: 12px; color: #00ff95; margin: 0;">TU KEY DE HOY:</p>
+            <div class="key-text" id="finalKey"></div>
+            <p style="font-size: 10px; color: #555; margin-top: 10px;">Cópiala y pégala en Delta</p>
+        </div>
+    </div>
+
+    <script>
+        function generarKey() {
+            const idInput = document.getElementById("userId").value;
+            const display = document.getElementById("keyDisplay");
+            const keyText = document.getElementById("finalKey");
+
+            if (!idInput || idInput.length < 3) {
+                alert("Por favor, ingresa un UserId válido.");
+                return;
+            }
+
+            // Lógica Sincronizada con Roblox
+            const hoy = new Date();
+            // Obtiene Día y Mes en formato DDMM (ej: 1502 para 15 de febrero)
+            const dia = String(hoy.getDate()).padStart(2, '0');
+            const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+            const fechaString = dia + mes;
+
+            // FÓRMULA: ID + FECHA
+            const resultado = parseInt(idInput) + parseInt(fechaString);
+            const keyFinal = "BR-" + resultado;
+
+            // Mostrar resultado
+            keyText.innerText = keyFinal;
+            display.style.display = "block";
+        }
+    </script>
+</body>
+</html>
