@@ -1,1 +1,1 @@
-# brainrot-key
+key
